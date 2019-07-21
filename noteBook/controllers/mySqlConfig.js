@@ -64,11 +64,19 @@ let findNoteDetailByID = function(ID) {
     return allServies.query(_sql);
 }
 
+// 新增note
+let insertNote = function(value) {
+    let _sql = `insert into users set username=?,userpwd=?,nickname=?;`
+    return allServies.query(_sql, value)
+}
+
+
 module.exports = {
     getAllUsers,
     insertUser,
     findUser,
     userLogin,
     findNoteListByType,
-    findNoteDetailByID
+    findNoteDetailByID,
+    insertNote
 }
