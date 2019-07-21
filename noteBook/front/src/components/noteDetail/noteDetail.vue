@@ -6,7 +6,7 @@
     <div class="note-content">
       <div class="tab">
         <span class="comm note-type">{{detailData.note_type}}</span>
-        <span class="comm nickname">{{detailData.nickname}}</span>
+        <span class="comm nickname"  >{{detailData.nickname}}</span>
       </div>
       <p class="title">{{detailData.title}}</p>
       <div class="content" v-html="detailData.note_content"></div>
@@ -46,6 +46,9 @@ export default {
   },
   created() {
     this.initDetail()
+  },
+  person() {
+    this.$route.push({path:'/person'})
   }
 };
 </script>
