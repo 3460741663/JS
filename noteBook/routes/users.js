@@ -166,5 +166,10 @@ router.post('/findNoteDetailByID', async (ctx, next) => {
     })
 })
 
+// 插入数据
+router.post('/insertNote', async (ctx,next) => {
+  
+})
+
 
 module.exports = router
