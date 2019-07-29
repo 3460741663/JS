@@ -1,0 +1,24 @@
+{
+  "name": "webpack-vue-build",
+  "version": "1.0.0",
+  "description": "减少文件体积\r rollup (tree-shaking: 剔除无用代码)\r ## webpack 3.0\r 配置太复杂了\r parcel 0 配置\r ## webpack 4.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf ./build/ && webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "rimraf": "^3.0.0",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
