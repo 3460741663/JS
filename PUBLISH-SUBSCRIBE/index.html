@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PublishSubscribe</title>
+  <style>
+    html, body {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #box {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: chartreuse;
+      cursor: pointer;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+    // 订阅
+    class SubScribe {
+      constructor () {
+        this.pond = []
+      }
+
+      // 向容器中添加方法
+      add (fn) {
+        let pond = this.pond,
+            isExist = false;
+
+        pond.forEach(item => item === fn ? isExist = true : null)
+        !isExist ? pond.push(fn) : null;
+        
+        // pond.filter((index, item, arr) => {
+        //   return arr.indexOf(item) === index;
+        // })
+      }
+
+      // 向容器中移除
+      remove (fn) {
+        let pond = this.pond;
+        pond.forEach((item, index) => {
+          if (item === fn) {
+            pond[index] = null;
+          }
+        })
+      }
+      
+      // 把容器的 null 去掉
+      fire (...arg) {
+        let pond = this.pond;
+        for (let i = 0; i < pond.length; i++) {
+          let item = pond[i];
+          if (item === null) {
+            pond.splice(i, 1);
+            i --;
+            continue;
+          }
+          item(...arg);
+        }
+      }
+    }
+    window.SubScribe = SubScribe;
+
+    if (typeof SubScribe === 'undefined') {
+      throw new ReferenceError('没有引入SubScribe.js!');
+    }
+
+    class Drag {
+      constructor (ele) {
+        this.ele = ele;
+        ['strX', 'strY', 'strL', 'strT', 'curL', 'curT'].forEach(item => {
+          this[item] = null;
+        })
+
+        this.subDown = new SubScribe
+        this.subMove = new SubScribe
+        this.subUp = new SubScribe
+
+        this.DOWN = this.down.bind(this);
+        this.ele.addEventListener('mousedown', this.DOWN)
+      }
+      down (event) {
+        let ele = this.ele;
+        this.strX = event.clientX;
+        this.strY = event.clientY;
+        this.strL = ele.offsetLeft;
+        this.strT = ele.offseTop;
+        this.MOVE = this.move.bind(this);
+        this.UP = this.up.bind(this);
+        document.addEventListener('mousemove', this.MOVE);
+        document.addEventListener('mouseup', this.UP);
+        this.subDown.fire(ele,event)
+      }
+      move (event) {
+        let ele = this.ele;
+        this.curL = event.clientX - this.strX + this.strL;
+        this.curT = event.clientY - this.strY + this.strT;
+        ele.style.left = this.curL + 'px';
+        ele.style.top = this.curT + 'px';
+      }
+    }
+  </script>
+</body>
+</html>
