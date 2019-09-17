@@ -6,6 +6,14 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+var bus = new Vue()
+var eventBus = {
+  install (Vue, options) {
+    Vue.prototype.$bus = bus
+  }
+}
+Vue.use(eventBus)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
