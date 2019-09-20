@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Go() {
+      this.a = [];
+    }
+    // Go.prototype.a = 2;
+    Go.prototype.change = function () {
+      this.a.push(1);
+    }
+    function Child() {};
+    Child.prototype = new Go();
+    var child1 = new Child();
+    var child2 = new Child();
+    // {
+    //   __proto__ : {
+    //     a : [],
+    //     __proto__ : {}
+    //   }
+    // }
+    console.log(new Child());
+    function Bar(){};
+    console.log(Bar.prototype, Bar.prototype.constructor === Bar)
+  </script>
+</body>
+</html>
