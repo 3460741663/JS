@@ -11,15 +11,15 @@ router.get('/bar', function (ctx, next) {
   ctx.body = 'this is a users/bar response'
 })
 
-router.get('/all', async(ctx, next) => {
+router.get('/all', async (ctx, next) => {
   await userService.getAllUsers()
-  .then((res) => {
-    console.log('打印结果' + JSON.stringify(res))
-    ctx.body = res
-  })
+    .then((res) => {
+      console.log('打印结果' + JSON.stringify(res))
+      ctx.body = res
+    })
 })
 // 注册
-router.post('/userRegister', async(ctx, next) => {
+router.post('/userRegister', async (ctx, next) => {
   var _username = ctx.request.body.username
   var _userpwd = ctx.request.body.userpwd
   var _nickname = ctx.request.body.nickname
@@ -73,7 +73,7 @@ router.post('/userRegister', async(ctx, next) => {
 
 
 // 登陆
-router.post('/userLogin', async(ctx, next) => {
+router.post('/userLogin', async (ctx, next) => {
   var _username = ctx.request.body.username
   var _userpwd = ctx.request.body.userpwd
 
@@ -123,17 +123,46 @@ router.post('/findNoteListByType', async (ctx, next) => {
         }
       } else {
         r = 'error',
+          ctx.body = {
+            code: 800004,
+            data: r,
+            mess: '查找失败'
+          }
+      }
+    }).catch(err => {
+      ctx.body = {
+        code: 800002,
+        data: err
+      }
+    })
+})
+
+// 根据笔记的ID查询笔记详情
+router.post('/findNoteDetailByID', async (ctx, next) => {
+  let id = ctx.request.body.id;
+  await userService.findNoteDetailByID(id)
+    .then(async(res) => {
+      let r = ''
+      if (res.length) {
+        r = 'OK'
         ctx.body = {
-          code: 800004,
+          code: '800000',
+          data: res[0],
+          mess: '查找成功'
+        }
+      } else {
+        r = 'error'
+        ctx.body = {
+          code: '800004',
           data: r,
           mess: '查找失败'
         }
       }
-    }).catch( err => {
+    }).catch((err) => {
       ctx.body = {
-        code: 800002,
+        code: '800002',
         data: err
-      } 
+      }
     })
 })
 
