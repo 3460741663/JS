@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const res = ['1', '2', '3'].map(parseInt);
+    console.log(res);
+    // 函数是一等公民 ： 它和其他的变量有同等的地位
+    function foo (a, b) {
+      console.log(a);
+      b();
+    }
+    function bar() {
+      console.log(456);
+    }
+    foo(1, bar);
+    // 1.
+    ['1', '2', '3'].map((a, b, c) => {
+      console.log(a, b, c)
+    })
+    // 2
+    function bar123 (e) {
+      console.log(e)
+    }
+    ['1', '2', '3'].map(bar123);
+    // paseInt需要转换为十进制数，第二个参数为当前字符串的禁制数
+    parseInt('123',2);
+  </script>
+</body>
+</html>
