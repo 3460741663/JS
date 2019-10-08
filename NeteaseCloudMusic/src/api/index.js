@@ -42,5 +42,26 @@ export default {
   // 用户登录
   Login (params) {
     return fetchGet('/login', params)
+  },
+  // 歌单
+  DiscLists (params) {
+    return fetchGet('/top/playlist', params)
+  },
+  // 歌单详情
+  SongList (params) {
+    return fetchGet('/playlist/detail', params)
+  },
+  // 歌曲搜索
+  MusicSearch (params) {
+    return fetchGet('/search', params)
+  },
+  // 热搜
+  HotSearchKey () {
+    return fetchGet('/search/hot')
+  },
+  // 歌词
+  MusicLyric (id) {
+    return fetchGet('/lyric', {id})
   }
+
 }
