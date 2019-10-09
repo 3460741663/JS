@@ -7,6 +7,7 @@ import fastclick from 'fastclick'
 import VueLazyLoad from 'vue-lazyload'
 // eslint-disable-next-line camelcase
 import def_lazy_img from '../static/img/loading.gif'
+import store from './vuex/store'
 
 Vue.use(VueLazyLoad, {
   loading: def_lazy_img
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
