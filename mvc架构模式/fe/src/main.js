@@ -5,7 +5,8 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 
-axios.default.baseURL = 'http://localhost:3003'
+// axios.defaults.baseURL =
+axios.defaults.baseURL = 'http://localhost:3003'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

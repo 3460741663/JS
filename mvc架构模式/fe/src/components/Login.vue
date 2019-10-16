@@ -1,11 +1,10 @@
 <template>
   <div>
-    <input type="text" name="name" v-model="name">
-    <input type="password" v-model="password">
+    <input type="text" name="name" v-model="name" />
+    <input type="password" v-model="password" />
     <button @click="login">登录</button>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 export default {
@@ -17,17 +16,16 @@ export default {
   },
   methods: {
     login () {
+      // restful 风格的 api
       axios.post('/api/v1/login', {
         name: this.name,
         password: this.password
-      }).then(res => {
-        console.log(res)
       })
+        .then(res => {
+        // if (res.)
+          console.log(res)
+        })
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
