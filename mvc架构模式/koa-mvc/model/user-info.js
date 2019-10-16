@@ -10,6 +10,11 @@ const insertDate = function(val) {
   // zhaomeng17 -> 哈希算法 -> 4327893
   return query(sql, [val.name, md5(val.password)]);
 }
+const queryByName = async (name) => {
+  let sql = 'select * from user_info where name = ?'
+  return query(sql, [ name ])
+}
 module.exports = {
-  insertDate
+  insertDate,
+  queryByName
 }
