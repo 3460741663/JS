@@ -108,4 +108,34 @@ router.post('/userLogin', async(ctx, next) => {
     })
 })
 
+// 根据分类名称查找对应的数据列表
+router.post('/findNoteListByType', async (ctx, next) => {
+  let note_type = ctx.request.body.note_type
+  await userService.findNoteListByType(note_type)
+    .then(async (res) => {
+      let r = ''
+      if (res.length) {
+        r = 'OK'
+        ctx.body = {
+          code: 800000,
+          data: res,
+          mess: '查找成功'
+        }
+      } else {
+        r = 'error',
+        ctx.body = {
+          code: 800004,
+          data: r,
+          mess: '查找失败'
+        }
+      }
+    }).catch( err => {
+      ctx.body = {
+        code: 800002,
+        data: err
+      } 
+    })
+})
+
+
 module.exports = router
