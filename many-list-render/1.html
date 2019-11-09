@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="contianer">
+  </ul>
+  <script>
+    const total = 100000;
+    const ul = document.getElementById('contianer');
+    let time1 = Date.now();
+    setTimeout(() => {
+      let time2 = Date.now();
+      console.log(time2 - time1);
+    }, 0);
+    for ( let i = 0; i < total; i ++){
+      let li = document.createElement('li');
+      li.innerHTML = Math.random() * total;
+      ul.appendChild(li);
+    }
+    
+    
+    
+  </script>
+</body>
+</html>
