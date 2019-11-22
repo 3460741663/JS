@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- useScaleAble:no -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <label for="touchstart">touchstart:</label>
+    <span id="touchstart"></span>
+  </div>
+  <div>
+    <label for="touchend">touchend:</label>
+    <span id="touchend"></span>
+  </div>
+  <div>
+    <label for="click">click:</label>
+    <span id="click"></span>
+  </div>
+  <div>
+    <div id="test">开始检测</div>
+    <div id="diff">计算时间</div>
+  </div>
+  <script>
+    var test = document.getElementById('test');
+    var diff = document.getElementById('diff');
+    var touchstart = document.getElementById('touchstart');
+    var touchend = document.getElementById('touchend');
+    var click = document.getElementById('click');
+    test.addEventListener('touchstart', () => {
+      touchstart.innerHTML = Date.now()
+    })
+    test.addEventListener('touchend', (e) => {
+      e.preventDefault()
+      // 1
+      // test.click()
+      // 2 自定义事件
+      let event = document.createEvent('MouseEvents')
+      event.initEvent('click');
+      test.dispatchEvent(event);
+      
+      touchend.innerHTML = Date.now()
+    })
+    test.addEventListener('click', () => {
+      click.innerHTML = Date.now()
+    })
+    diff.addEventListener('click', () => {
+      let p = document.createElement('p');
+      p.innerHTML = click.innerText - touchend.innerText
+      document.body.appendChild(p)
+    })
+    diff.addEventListener('dblclick',() => {
+      console.log(123);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="test">
+    <li><span>123</span>    123</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <script>
+    var test = document.getElementById('test');
+    test.addEventListener('click', (e) => {
+      console.log(e.path);
+      console.log(e.currentTarget)
+    })
+  </script>
+</body>
+</html>
