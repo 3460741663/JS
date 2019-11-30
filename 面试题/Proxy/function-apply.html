@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function asyncQue(cb) {
+      setTimeout(() =>{
+        cb()
+      }, 1000)
+    }  
+    const cb = () => {
+      console.log(123);
+    }
+    // 劫持方法的调用
+    // Reflect 反射
+    let promise
+    let asyncQueProxy = new Proxy(asyncQue, {
+      apply(target, ctx, ...args) {
+        //
+        promise = Promise.resolve(promise).then(() => {
+          return new Promise((resolve, reject) => {
+          // 恢复它的默认行为
+          Reflect.apply(target, ctx, [() =>{
+            // args[0]();
+            args[0][0]();
+            resolve();}]
+          )
+        })
+        })
+      } 
+    })
+    asyncQueProxy(cb);
+    asyncQueProxy(cb);
+    asyncQueProxy(cb);
+  </script>
+</body>
+</html>

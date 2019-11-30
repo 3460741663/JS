@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let MyProxy = function(target, handle) {
+      let setter = handle.set ? function() {
+        return handle.set(this, prop, val);
+      } : function (prop, val) {
+        // 系统默认的 set
+        // this
+        this[prop] = val
+      }
+      let getter = handle.getter? function() {
+        return handle.getter(prop)
+      } : function (prop) {
+        let keys = Object.keys(target);
+        keys.forEach((keys) =>{
+          // 实例
+          Object.defineProperty(this, keys, {
+            get: getter.bind(target,),
+            set: setter.bind(target,)
+          })
+        })
+      }
+      Object.defineProperty()
+    }
+    function observe(o, callBack) {
+      return new MyProxy(o, {
+        set(target, property, value) {
+          callBack(property, value);
+          target[property] = value
+        }
+      })
+    }
+
+    // function(p) {
+    //   this
+    // }
+    
+    function observe(o, callback) {
+      return new Proxy(o, {
+        set(target, property, value) {
+          callback(property, value);
+          target[property] = value;
+        },
+      });
+    }
+    const x = {'name': 'BB-8'};
+    const p = observe(x, (property, value) => console.info(property, value));
+    p.name = 'BB-9';
+  </script>
+</body>
+</html>
