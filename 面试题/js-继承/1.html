@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(){
+      this.age = 40
+    }
+    Person.prototype.say = function(){console.log('say')};
+    // console.log(Person.prototype)
+    // // Object
+    // let obj = {};
+    // // b.hasOwnProperty('b')
+    // console.log(obj.__proto__ === Object.prototype)
+    // Person.run = function () {
+    //   console.log('run')
+    // }
+    // var p = new Person()
+    // console.log(p);
+    // // console.log(p.run())
+    
+    
+    // // 继承的方法
+    // // 1 属性在__proto__上
+    // function Student() {}
+    // Student.prototype = new Person()
+    // // Student.prototype.__proto__ = Person.prototype
+    // console.log(new Student())
+    // 2  浅复制
+    // Object.create();
+    function Student1() {}
+    Student1.prototype = Object.create(Person.prototype)
+    var s = new Student1();
+    console.log(s)
+    // Student1.prototype.__proto__ -> F
+    // 继承方法
+    function myCreate(obj) {
+      var F = function() {}
+      F.prototype = obj;
+      return new F();
+    }
+    // es6 extends 使用的方法
+    function Student2() {
+      // 1 继承属性
+      Person.call(this);
+    }
+    // 2.继承方法
+    Student2.prototype = Object.create(Person.prototype)
+    // 3. 修正constructor方法
+    Student2.prototype.constructor = Student2;
+
+    let per = new Student2();
+    console.log(per);
+    // console.log(Student2)
+  </script>
+</body>
+</html>

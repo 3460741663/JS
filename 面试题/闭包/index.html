@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Bar(name) {
+      this.name = name
+    }
+    function makeFactor(name){
+      var p = new Bar(name);
+      return function() {
+        // return p // 此时无法回收
+        return {
+          create: p,
+          destroyed: function() {
+            p = null;
+          }
+        }
+      }
+    }
+    var p1 = makeFactor('zhao');
+    var p2 = p1();
+    console.log(p2);
+    p2.destroyed();
+    console.log(p2);
+    // p2 = null
+    // 引用计数回收机制 引用 数量 + 1
+  </script>
+</body>
+</html>

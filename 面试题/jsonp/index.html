@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function cb() {
+      console.log(data);
+    }
+  </script>
+  <script src="/api/abc?callback=cb"></script>
+  <!-- callback=cb -->
+  <!-- 返回的数据当成js执行 -->
+  <!-- 返回 cb({name:'123'})执行 -->
+</body>
+</html>

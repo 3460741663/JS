@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Student() {
+      this.age = 40;
+      // new 是把this绑定为实例的this
+      // 相当于 s.age = 40
+      // 当new有返回值
+      return [1, 2, 3];
+      
+    }
+    Student.prototype.say = function() {}
+    var s = new Student();
+    console.log(s)
+    // s = {
+    //   age: 40,
+    //   __proto__: {
+    //     // Student.prototype
+    //     say: function(){}
+    //   }
+    // }
+    function myNew(contructor, ...args) {
+      let obj = {} // 1. 生成一个对象
+      // 2. 继承属性，绑定this
+      let ret = contructor.apply(obj, args)
+      // 3. 继承方法
+      obj.__proto__ = contructor.prototype
+      // 当new方法有返回值
+      // return obj; 
+      // 4. 返回一个对象
+      return typeof ret === 'object' ? ret : obj
+    }
+    var s1 = myNew(Student);
+    console.log(s1)
+
+  </script>
+</body>
+</html>
