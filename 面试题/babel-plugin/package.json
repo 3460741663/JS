@@ -1,0 +1,16 @@
+{
+  "name": "babel-plugin",
+  "version": "1.0.0",
+  "description": "- 编译过程\r 1. 解析parse: 将代码解析生成抽象语法树（AST),即词法分析和语法分析过程\r 2. 转换: 对于AST进行一系列的操作，babel接受到的AST通过babel-traverse对其进行遍历，在此过程中进行添加，更新及删除等操作。\r 3. 生成: 将变化后的AST再转换为JS代码，使用的模板是babel-generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-types": "^6.26.0"
+  }
+}
